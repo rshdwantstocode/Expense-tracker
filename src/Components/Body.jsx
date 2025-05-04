@@ -11,14 +11,36 @@ export default function Body() {
                 </div>
             </section>
 
-            <section className="expenses-section radius-and-color">
-                <p>Hello</p>
-                <div className="expenses-chart"></div>
+            <section className="expenses-section">
+                <div className="expenses-categories">
+                    <span className="food-category">Food</span>
+                    <span className="bills-category">Bills</span>
+                    <span className="other-category">Others</span>
+                </div>
+                <div className="expenses-chart">
+                    charts
+                </div>
             </section>
 
             <section className="transaction-section radius-and-color">
-                <p>Transaction</p>
-                <div className="transaction-container"></div>
+                <div className="transaction-container">
+                    <h3 className="transaction-title">Transaction history</h3>
+                    <span className="transaction-history">
+                        <span>Transaction</span>
+                        <span>Transaction</span>
+                        <span>Transaction</span>
+                        <span>Transaction</span>
+                    </span>
+                </div>
+
+                <div className="transaction-footer">
+                    <span>
+                        <p>icon</p>
+                        <h4>Missing Transaction?</h4>
+                    </span>
+
+                    <button>ADD</button>
+                </div>
             </section>
         </main>
     </>

@@ -41,14 +41,13 @@ nav .name-header {
 
 main {
   display: flex;
-  column-gap: 50px;
+  column-gap: 45px;
   padding: 0 20px 0 20px;
-  height: 100%;
+  height: 85vh;
 }
 
 main .dashboard-section {
-
-  height: 75vh;
+  height: 83vh;
   width: 18vw;
   padding: 40px 0 15px 0;
 }
@@ -69,11 +68,85 @@ main .dashboard-section .route-container>a {
 
 main .expenses-section {
   width: 52vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main .expenses-section .expenses-chart {
+  height: 50%;
+  width: 49vw;
+  background-color: #ffff;
+  border-radius: 10px;
+}
+
+main .expenses-section .expenses-categories {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  column-gap: 2vw;
+  margin-bottom: 30px;
+}
+
+main .expenses-section .expenses-categories>.food-category,
+.bills-category,
+.other-category {
+  height: 100%;
+  width: 15vw;
   background-color: #ffff;
   border-radius: 10px;
 }
 
 main .transaction-section {
-
   width: 25vw;
+  height: 83vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main .transaction-section .transaction-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+main .transaction-section .transaction-container>.transaction-history {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.transaction-section .transaction-container .transaction-history>span {
+  height: 10vh;
+  padding: 20px;
+  border-bottom: 1px solid hsla(0, 0%, 31%, 0.4);
+}
+
+main .transaction-section .transaction-container>.transaction-title {
+  height: 10vh;
+  border-bottom: 1px solid hsla(0, 0%, 31%, 0.4);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .transaction-section .transaction-footer {
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid hsla(0, 0%, 31%, 0.4);
+}
+
+main .transaction-section .transaction-footer>span {
+  display: flex;
+  column-gap: 10px;
 }
