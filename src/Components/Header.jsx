@@ -1,8 +1,10 @@
+import { PhilippinePeso } from "lucide-react";
+
 export default function Header() {
     return <>
         <nav>
             <span className="logo-header">
-                <h1>Logo</h1>
+                <h1 className="flex"><PhilippinePeso />eso Tracker</h1>
             </span>
 
             <span className="name-header">

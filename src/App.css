@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,6 +9,10 @@
 
 body {
   background-color: rgba(240, 247, 249, 255);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* font-weight: 400; */
+  /* line-height: 1.5; */
+  color: #333;
 }
 
 /* Header */
@@ -64,6 +70,9 @@ main .dashboard-section .route-container>a {
   padding-left: 50px;
   text-decoration: none;
   color: black;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 }
 
 main .expenses-section {
@@ -135,6 +144,7 @@ main .transaction-section .transaction-container>.transaction-title {
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 5px;
 }
 
 main .transaction-section .transaction-footer {
@@ -148,5 +158,17 @@ main .transaction-section .transaction-footer {
 
 main .transaction-section .transaction-footer>span {
   display: flex;
+  align-items: center;
   column-gap: 10px;
+}
+
+main .transaction-section .transaction-footer>button {
+  width: 80px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: hsl(120, 77%, 42%)
 }
