@@ -6,10 +6,22 @@ import {
     Settings,
     Wallet,
     History,
-    Plus
+    Plus,
+    UtensilsCrossed
 } from 'lucide-react';
+import React from 'react';
+import Dialog from './DialogAdd';
 
 export default function Body() {
+
+    const [transactions, setTransactions] = React.useState([]);
+    const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+
+    // Handle form submission
+    const handleAddTransaction = (newTransaction) => {
+        setTransactions([...transactions, newTransaction]);
+    };
+
     return <>
         <main>
             <section className="dashboard-section radius-and-color">
@@ -37,10 +49,23 @@ export default function Body() {
                 <div className="transaction-container">
                     <h3 className="transaction-title"><History />Transaction history</h3>
                     <span className="transaction-history">
-                        <span>Transaction</span>
-                        <span>Transaction</span>
-                        <span>Transaction</span>
-                        <span>Transaction</span>
+
+
+                        {transactions.length < 1 ? (
+                            <p>No transactions yet.</p>
+                        ) : (
+                            transactions.map((txn, index) => {
+                                return (
+                                    <span key={index} className='transactions'>
+                                        <span>
+                                            {txn.category === 'food' ? <UtensilsCrossed /> : <Wallet />}
+                                            {txn.spend}
+                                        </span>
+                                        {txn.spent + '.00'}
+                                    </span>)
+                            })
+                        )}
+
                     </span>
                 </div>
 
@@ -50,8 +75,16 @@ export default function Body() {
                         <h4>Missing Transaction?</h4>
                     </span>
 
-                    <button><Plus /></button>
+                    <button
+                        onClick={() => { setIsDialogOpen(true) }}
+                    ><Plus /></button>
                 </div>
+
+                <Dialog
+                    isOpen={isDialogOpen}
+                    onClose={() => setIsDialogOpen(false)}
+                    onAddTransaction={handleAddTransaction}
+                />
             </section>
         </main>
     </>

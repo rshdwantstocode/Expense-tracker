@@ -107,6 +107,26 @@ main .expenses-section .expenses-categories>.food-category,
   width: 15vw;
   background-color: #ffff;
   border-radius: 10px;
+  padding: 10px;
+}
+
+.food-category,
+.bills-category,
+.other-category {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("./assets/utensils.svg");
+  background-repeat: no-repeat;
+  background-size: 85px;
+  background-position: 151px 35px;
+}
+
+.bills-category {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("./assets/receipt-text.svg");
+  background-position: 170px 30px;
+}
+
+.other-category {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("./assets/tickets.svg");
+  background-position: 160px 30px;
 }
 
 main .transaction-section {
@@ -131,10 +151,18 @@ main .transaction-section .transaction-container>.transaction-history {
   flex-direction: column;
 }
 
-.transaction-section .transaction-container .transaction-history>span {
+.transaction-section .transaction-container .transaction-history>.transactions {
   height: 10vh;
   padding: 20px;
   border-bottom: 1px solid hsla(0, 0%, 31%, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transactions>span {
+  display: flex;
+  column-gap: 10px;
 }
 
 main .transaction-section .transaction-container>.transaction-title {
@@ -171,4 +199,18 @@ main .transaction-section .transaction-footer>button {
   border-radius: 5px;
   cursor: pointer;
   background-color: hsl(120, 77%, 42%)
+}
+
+/* Dialoog Box */
+.dialog-box {
+  padding: 5px;
+}
+
+.dialog-title {
+  padding: 10px;
+  margin-bottom: 40px;
+}
+
+.dialog-category-text {
+  margin-right: 5px;
 }
