@@ -1,5 +1,5 @@
-import { useState } from "react";
-export default function Dialog({ isOpen, onClose, onAddTransaction }) {
+import { useState, useEffect } from "react";
+export default function Dialog({ isOpen, onClose, onAddTransaction, editingTransaction }) {
     const categories = [
         { value: "food", label: "Food & Drinks" },
         { value: "transport", label: "Transportation" },
@@ -18,6 +18,24 @@ export default function Dialog({ isOpen, onClose, onAddTransaction }) {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+    useEffect(() => {
+        if (editingTransaction) {
+            setFormData({
+                spend: editingTransaction.spend || '',
+                spent: editingTransaction.spent || '',
+                category: editingTransaction.category || 'food'
+            });
+        } else {
+            // Reset form for new transaction
+            setFormData({
+                spend: '',
+                spent: '',
+                category: 'food'
+            });
+        }
+    }, [editingTransaction, isOpen])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();

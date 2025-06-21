@@ -84,10 +84,13 @@ main .expenses-section {
 }
 
 main .expenses-section .expenses-chart {
-  height: 50%;
+  height: 60%;
   width: 49vw;
   background-color: #ffff;
   border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 main .expenses-section .expenses-categories {
@@ -144,11 +147,10 @@ main .transaction-section .transaction-container {
 }
 
 main .transaction-section .transaction-container>.transaction-history {
-  height: auto;
-  display: flex;
-  justify-content: center;
-  /* align-items: center; */
+  height: 65vh;
   flex-direction: column;
+  flex-wrap: wrap;
+  overflow-y: auto;
 }
 
 .transaction-section .transaction-container .transaction-history>.transactions {
@@ -158,11 +160,38 @@ main .transaction-section .transaction-container>.transaction-history {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+}
+
+.transaction-section .transaction-container .transaction-history>.transactions::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(120, 100%, 25%, 0.521);
+  opacity: 0.5;
+  transition: .5s ease;
+  z-index: 1;
+}
+
+.transaction-section .transaction-container .transaction-history>.transactions:hover::before {
+  top: 0;
 }
 
 .transactions>span {
   display: flex;
   column-gap: 10px;
+}
+
+.no-transaction {
+  width: auto;
+  text-align: center;
+  margin-top: 20px;
 }
 
 main .transaction-section .transaction-container>.transaction-title {
