@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-export default function Dialog({ isOpen, onClose, onAddTransaction, editingTransaction }) {
+import uniqid from 'uniqid';
+export default function Dialog({ isOpen, onClose, onAddTransaction, editingTransaction, handleDeleteTransaction }) {
     const categories = [
         { value: "food", label: "Food & Drinks" },
         { value: "transport", label: "Transportation" },
@@ -9,6 +10,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
     ];
 
     const [formData, setFormData] = useState({
+        id: '',
         spend: '',
         spent: '',
         category: 'food', // Default category
@@ -19,9 +21,17 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleDelete = () => {
+        if (formData.id) {
+            handleDeleteTransaction(formData.id)
+        }
+
+    }
+
     useEffect(() => {
         if (editingTransaction) {
             setFormData({
+                id: editingTransaction.id || '',
                 spend: editingTransaction.spend || '',
                 spent: editingTransaction.spent || '',
                 category: editingTransaction.category || 'food'
@@ -29,6 +39,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
         } else {
             // Reset form for new transaction
             setFormData({
+                id: uniqid(),
                 spend: '',
                 spent: '',
                 category: 'food'
@@ -43,6 +54,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
         onClose();
 
         setFormData({
+            id: uniqid(),
             spend: '',
             spent: '',
             category: 'food',
@@ -66,11 +78,12 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                         </button>
                     </div>
                     <form onSubmit={handleSubmit} className="flex items-center justify-center flex-col gap-y-4">
+                        <input type="hidden" name="id" value={formData.id} />
                         <div className="mb-4">
                             <label htmlFor="" className="block text-gray-700 mb-2">Pinaggastuhan</label>
                             <input type="text"
                                 name="spend"
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border rounded dialog-text"
                                 value={formData.spend}
                                 onChange={handleChange}
                                 required />
@@ -79,7 +92,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                             <label htmlFor="" className="block text-gray-700 mb-2">Money Spent</label>
                             <input type="number"
                                 name="spent"
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border rounded dialog-text"
                                 value={formData.spent}
                                 onChange={handleChange}
                                 required />
@@ -103,10 +116,11 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                         </div>
                         <button
                             type="submit"
-                            className="w-30 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                            className="edit-button w-30 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                         >
                             Submit
                         </button>
+                        {editingTransaction ? <button className="delete-button" onClick={handleDelete}>Delete</button> : null}
                     </form>
                 </div>
             </div>

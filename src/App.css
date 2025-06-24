@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+/* @import "tailwindcss"; */
 
 * {
   box-sizing: border-box;
@@ -84,7 +85,7 @@ main .expenses-section {
 }
 
 main .expenses-section .expenses-chart {
-  height: 60%;
+  height: 80%;
   width: 49vw;
   background-color: #ffff;
   border-radius: 10px;
@@ -111,6 +112,8 @@ main .expenses-section .expenses-categories>.food-category,
   background-color: #ffff;
   border-radius: 10px;
   padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .food-category,
@@ -130,6 +133,13 @@ main .expenses-section .expenses-categories>.food-category,
 .other-category {
   background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("./assets/tickets.svg");
   background-position: 160px 30px;
+}
+
+.other-total>h2,
+.bills-total>h2,
+.food-total>h2 {
+  font-size: 25px;
+  font-style: bold;
 }
 
 main .transaction-section {
@@ -169,19 +179,20 @@ main .transaction-section .transaction-container>.transaction-history {
 .transaction-section .transaction-container .transaction-history>.transactions::before {
   content: "";
   position: absolute;
-  top: 100%;
-  left: 0;
+  /* top: 100%; */
+  right: 100%;
   width: 100%;
   height: 100%;
-  background: hsla(120, 100%, 25%, 0.521);
+  background: hsla(120, 97%, 15%, 0.789);
   opacity: 0.5;
   transition: .5s ease;
   z-index: 1;
 }
 
 .transaction-section .transaction-container .transaction-history>.transactions:hover::before {
-  top: 0;
+  right: 0;
 }
+
 
 .transactions>span {
   display: flex;
@@ -242,4 +253,26 @@ main .transaction-section .transaction-footer>button {
 
 .dialog-category-text {
   margin-right: 5px;
+}
+
+.dialog-text {
+  padding-left: 3px;
+}
+
+.edit-button {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: red;
+  width: 120px;
+  padding: 2px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: hsl(0, 100%, 40%);
 }

@@ -33,6 +33,12 @@ export default function Body() {
         setEditingTransaction(null);
     };
 
+    const handleDeleteTransaction = (id) => {
+        setTransactions(transactions.filter(txn => txn.id !== id));
+        setIsDialogOpen(false)
+        setEditingTransaction(null)
+    }
+
     const handleTransactionClick = (transaction, index) => {
         setEditingTransaction({ ...transaction, index });
         setIsDialogOpen(true);
@@ -139,11 +145,14 @@ export default function Body() {
                         </span>
                     </span>
                 </div>
+
                 <div className="expenses-chart">
-                    <MyChart />
 
-
+                    <div>
+                        <MyChart />
+                    </div>
                 </div>
+
             </section>
 
             <section className="transaction-section radius-and-color">
@@ -187,6 +196,7 @@ export default function Body() {
                     onClose={handleCloseDialog}
                     onAddTransaction={editingTransaction ? handleEditTransaction : handleAddTransaction}
                     editingTransaction={editingTransaction}
+                    handleDeleteTransaction={handleDeleteTransaction}
                 />
             </section>
         </main>
