@@ -91,7 +91,31 @@ main .expenses-section .expenses-chart {
   border-radius: 10px;
   padding: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+main .expenses-section .expenses-chart .chart {
+  width: 20vw;
+}
+
+main .expenses-section .expenses-chart .income {
+  width: 15vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.income>.income-header {
+  margin-top: 20px;
+}
+
+.income>.income-body {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 60px;
 }
 
 main .expenses-section .expenses-categories {
