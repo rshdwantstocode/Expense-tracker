@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import uniqid from 'uniqid';
+import { motion, AnimatePresence } from "framer-motion";
+
 export default function Dialog({ isOpen, onClose, onAddTransaction, editingTransaction, handleDeleteTransaction }) {
     const categories = [
         { value: "food", label: "Food & Drinks" },
@@ -65,9 +67,14 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
 
     return (
         <>
-            <div
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-white bg-opacity-2 z-50 flex items-center justify-center"
                 onClick={onClose}
-                className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm w-full h-full"></div>
+            >
+            </motion.div>
 
             <div className="fixed inset-0 bg-transparent flex items-center justify-center z-50 ">
                 <div className="dialog-box bg-white p-6 rounded-lg shadow-lg max-w-lg w-full h-100">

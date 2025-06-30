@@ -48,15 +48,21 @@ nav .name-header {
 
 main {
   display: flex;
+  flex-direction: row;
   column-gap: 45px;
   padding: 0 20px 0 20px;
   height: 85vh;
+  width: 100%;
 }
 
 main .dashboard-section {
   height: 83vh;
   width: 18vw;
   padding: 40px 0 15px 0;
+}
+
+.motion-div {
+  display: flex;
 }
 
 main .dashboard-section .route-container {
