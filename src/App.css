@@ -57,7 +57,7 @@ main {
 
 main .dashboard-section {
   height: 83vh;
-  width: 18vw;
+  min-width: 18vw;
   padding: 40px 0 15px 0;
 }
 
@@ -268,7 +268,7 @@ main .transaction-section .transaction-footer>button {
   justify-content: center;
   border-radius: 5px;
   cursor: pointer;
-  background-color: hsl(120, 77%, 42%)
+  background-color: hsl(190, 81%, 67%);
 }
 
 /* Dialoog Box */

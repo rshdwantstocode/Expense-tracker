@@ -2,7 +2,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Expenses({ totalFood, totalBills, totalOther }) {
+export default function Expenses({ limit, totalFood, totalBills, totalOther }) {
 
     function MyChart() {
         const data = {
@@ -89,9 +89,9 @@ export default function Expenses({ totalFood, totalBills, totalOther }) {
                     <span className='income-body'>
                         <p>Income(Month): 13000 </p>
                         <h4>Expenses Limit</h4>
-                        <p>Food: </p>
-                        <p>Bills: </p>
-                        <p>Others: </p>
+                        <p>Food: {limit.foods} </p>
+                        <p>Bills: {limit.bills} </p>
+                        <p>Others: {limit.bills} </p>
                     </span>
 
                 </div>

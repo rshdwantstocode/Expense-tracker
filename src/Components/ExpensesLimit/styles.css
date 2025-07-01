@@ -1,0 +1,59 @@
+.expense-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 75vw;
+    height: 80vh;
+}
+
+.expense-section>h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.expense-container {
+    width: 70vw;
+    height: 70vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+}
+
+.expense-form>label {
+    font-weight: 800;
+}
+
+.expense-form>input {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.expense-form>.button-container {
+    width: 212px;
+    display: flex;
+    justify-content: center;
+}
+
+.expense-form>.button-container button {
+    margin-top: 20px;
+    background-color: hsl(190, 81%, 67%);
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.expense-form>.button-container button:hover {
+    background-color: hsla(190, 81%, 67%, 0.777);
+}
