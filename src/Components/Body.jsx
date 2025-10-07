@@ -6,16 +6,14 @@ import {
     Settings,
 } from 'lucide-react';
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Link, Routes, Route, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Expenses from './Expenses';
 import Transactions from './Transactions';
 import ExpensesLimit from './ExpensesLimit/ExpensesLimit';
+import { Link } from 'react-router-dom';
 
-
-
-export default function Body() {
+export default function Body({ currentView = "dashboard" }) {
 
     const [transactions, setTransactions] = React.useState([]);
     const [expenseLimit, setExpenseLimit] = React.useState({
@@ -42,59 +40,60 @@ export default function Body() {
     const totalBills = calculateTotal(transactions, ['bills']);
     const totalOther = calculateTotal(transactions, ['shopping', 'other', 'transport']);
 
-    return <>
+    // Remove Routes and conditionally render based on props
+    if (currentView === "expenses") {
+        return (
+            <main className='main-container'>
+                <section className="dashboard-section radius-and-color">
+                    <div className="route-container">
+                        <Link to="/dashboard"><LayoutDashboard /> Dashboard</Link>
+                        <Link to="/bill-payments"><CreditCard /> Bill and Payments</Link>
+                        <Link to="/expenses"><BanknoteArrowDown /> Expenses</Link>
+                        <Link to="/settings"><Settings /> Settings</Link>
+                        <a href="https://chatgpt.com/" target="blank" rel="noopener noreferrer"><CircleHelp />Get Help</a>
+                    </div>
+                </section>
+
+                <motion.div
+                    key="expenses-limit"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className='motion-div'
+                >
+                    <ExpensesLimit addExpenseLimit={handleExpenseLimit} />
+                </motion.div>
+            </main>
+        );
+    }
+
+    // Default dashboard view
+    return (
         <main className='main-container'>
             <section className="dashboard-section radius-and-color">
                 <div className="route-container">
-                    <Link to="/"><LayoutDashboard /> Dashboard</Link>
+                    <Link to="/dashboard"><LayoutDashboard /> Dashboard</Link>
                     <Link to="/bill-payments"><CreditCard /> Bill and Payments</Link>
                     <Link to="/expenses"><BanknoteArrowDown /> Expenses</Link>
                     <Link to="/settings"><Settings /> Settings</Link>
-                    <a href="https://chatgpt.com/" target="blank"><CircleHelp />Get Help</a>
+                    <a href="https://chatgpt.com/" target="blank" rel="noopener noreferrer"><CircleHelp />Get Help</a>
                 </div>
             </section>
 
-            <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
-
-                    <Route path="/" element={
-                        <motion.div
-                            key="default-view"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className='motion-div'
-                        >
-
-                            <Expenses
-                                limit={expenseLimit}
-                                totalFood={totalFood} totalBills={totalBills} totalOther={totalOther} />
-
-                            <Transactions
-                                transactions={transactions}
-                                setTransactions={setTransactions}
-                            />
-                        </motion.div>
-                    } />
-
-                    <Route path="/expenses" element={
-                        <motion.div
-                            key="expenses-limit"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        >
-                            <ExpensesLimit
-                                addExpenseLimit={handleExpenseLimit}
-                            />
-                        </motion.div>
-
-                    } />
-
-                </Routes>
-            </AnimatePresence>
-
-
+            <motion.div
+                key="default-view"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className='motion-div'
+            >
+                <Expenses
+                    limit={expenseLimit}
+                    totalFood={totalFood} totalBills={totalBills} totalOther={totalOther}
+                />
+                <Transactions
+                    transactions={transactions}
+                    setTransactions={setTransactions}
+                />
+            </motion.div>
         </main>
-    </>
+    );
 }

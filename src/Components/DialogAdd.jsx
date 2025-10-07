@@ -82,20 +82,20 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                 exit={{ opacity: 0 }}
             >
                 <div className="fixed inset-0 bg-transparent flex items-center justify-center z-50 ">
-                    <div className="dialog-box bg-white p-6 rounded-lg shadow-lg max-w-lg w-full h-100">
+                    <div className="p-3 bg-white rounded-lg shadow-lg max-w-lg w-full h-auto border ">
                         <div className="dialog-title flex justify-between items-center">
                             <h2 className="text-xl font-bold">Add</h2>
-                            <button onClick={onClose} className="text-gray-500 hover:text-gray-800 cursor-pointer">
+                            <button onClick={onClose} className="text-2xl text-gray-500 hover:text-gray-800 cursor-pointer">
                                 ✕
                             </button>
                         </div>
                         <form onSubmit={handleSubmit} className="flex items-center justify-center flex-col gap-y-4">
                             <input type="hidden" name="id" value={formData.id} />
-                            <div className="mb-4">
+                            <div className="mb-1.5">
                                 <label htmlFor="spend" className="block text-gray-700 mb-2">Pinaggastuhan</label>
                                 <input type="text"
                                     name="spend"
-                                    className="w-full p-2 border rounded dialog-text"
+                                    className="w-full py-1 indent-1.5 border rounded dialog-text"
                                     value={formData.spend}
                                     onChange={handleChange}
                                     required />
@@ -104,7 +104,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                                 <label htmlFor="spent" className="block text-gray-700 mb-2">Money Spent</label>
                                 <input type="number"
                                     name="spent"
-                                    className="w-full p-2 border rounded dialog-text"
+                                    className="w-full py-1 indent-1.5 border rounded dialog-text mb-2"
                                     value={formData.spent}
                                     onChange={handleChange}
                                     required />
@@ -114,7 +114,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                                 <label htmlFor="" className="dialog-category-text text-gray-700">Category: </label>
                                 <select
                                     name="category"
-                                    className="p-2 border rounded"
+                                    className="p-1 border rounded"
                                     value={formData.category}
                                     onChange={handleChange}
                                     required
@@ -128,7 +128,7 @@ export default function Dialog({ isOpen, onClose, onAddTransaction, editingTrans
                             </div>
                             <button
                                 type="submit"
-                                className="edit-button w-30 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                                className="edit-button w-30 text-white py-2 px-4 rounded bg-slate-700 hover:bg-slate-600 "
                             >
                                 Submit
                             </button>
