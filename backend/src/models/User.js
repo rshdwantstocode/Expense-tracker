@@ -20,6 +20,16 @@ const userSchema = mongoose.Schema({
         required: true,
         minlength: 6
     },
+
+    moneySettings: {
+        income: { type: Number, default: 0 },
+        expenseLimits: {
+            food: { type: Number, default: 0 },
+            bills: { type: Number, default: 0 },
+            others: { type: Number, default: 0 },
+        }
+    },
+
     createdAt: {
         type: Date,
         default: Date.now

@@ -103,7 +103,7 @@ const Register = () => {
                         id="email"
                         name="email"
                         type="email"
-                        className='py-[20px] h-5 rounded-xl indent-2 bg-slate-300 text-slate-800'
+                        className='py-[20px] h-5 rounded-xl indent-3 bg-slate-300 text-slate-800'
                         placeholder='Enter your email'
                         value={formData.email}
                         onChange={handleChange}

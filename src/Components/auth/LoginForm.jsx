@@ -38,11 +38,11 @@ const LoginForm = () => {
 
             if (response.status >= 200 && response.status < 300) {
                 // Login successful
-                // const { token, user } = response.data;
+                const { token, user } = response.data;
 
-                // // Store token in localStorage or context
-                // localStorage.setItem('token', token);
-                // localStorage.setItem('user', JSON.stringify(user));
+                // Store token in localStorage or context
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user));
 
                 // Redirect to notes page
                 toast.success('Login successful!')

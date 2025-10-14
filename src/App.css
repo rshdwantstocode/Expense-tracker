@@ -306,3 +306,9 @@ main .transaction-section .transaction-footer>button {
 .delete-button:hover {
   background-color: hsl(0, 100%, 40%);
 }
+
+.income-input {
+  background-color: #F1F7F8;
+  border: 1px solid;
+  text-indent: 8px;
+}

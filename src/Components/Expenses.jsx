@@ -1,8 +1,77 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import { api } from '../lib/axios';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { formatNumber } from '../utils/FormatNumber';
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Expenses({ limit, totalFood, totalBills, totalOther }) {
+export default function Expenses({ totalFood, totalBills, totalOther }) {
+
+    const [loading, setLoading] = useState(true);
+    const [expenseLimit, setExpenseLimit] = useState({
+        income: '0',
+        food: '0',
+        bills: '0',
+        others: '0',
+    });
+    // const [income, SetIncome] = useState(0)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchMoneySetting();
+    }, []);
+
+
+    const fetchMoneySetting = async () => {
+        try {
+            setLoading(true);
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                navigate('/auth/login');
+                return;
+            }
+
+            const response = await api.get("/auth/update-money", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (response.data.success) {
+                const money = response.data.moneySettings;
+                setExpenseLimit({
+                    income: money.income || '',
+                    food: money.expenseLimits.food || '',
+                    bills: money.expenseLimits.bills || '',
+                    others: money.expenseLimits.others || '',
+                })
+            }
+        } catch (error) {
+            console.error('Error fetching money:', error);
+
+            if (error.response?.status === 401) {
+                toast.error("Session expired. Please login again.");
+                localStorage.removeItem('token');
+                navigate('/auth/login');
+            } else {
+                toast.error("Failed to load transactions");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (totalFood !== undefined && totalBills !== undefined && totalOther !== undefined) {
+            setLoading(false);
+        }
+    }, [totalFood, totalBills, totalOther])
+
+    // debug this shit
 
     function MyChart() {
         const data = {
@@ -55,27 +124,43 @@ export default function Expenses({ limit, totalFood, totalBills, totalOther }) {
         return <Doughnut data={data} options={options} />;
     }
 
+    if (loading) {
+        return (
+            <section className="expenses-section">
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '200px',
+                    color: '#666'
+                }}>
+                    <p>Loading expenses data...</p>
+                </div>
+            </section>
+        );
+    }
+
     return <>
         <section className="expenses-section">
             <div className="expenses-categories">
                 <span className="food-category">
                     Food
                     <span className='food-total'>
-                        <h2>{totalFood}</h2>
+                        <h2>{formatNumber(totalFood)}</h2>
                     </span>
                 </span>
 
                 <span className="bills-category">
                     Bills
                     <span className='bills-total'>
-                        <h2>{totalBills}</h2>
+                        <h2>{formatNumber(totalBills)}</h2>
                     </span>
                 </span>
 
                 <span className="other-category">
                     Others
                     <span className='other-total'>
-                        <h2>{totalOther}</h2>
+                        <h2>{formatNumber(totalOther)}</h2>
                     </span>
                 </span>
             </div>
@@ -87,11 +172,11 @@ export default function Expenses({ limit, totalFood, totalBills, totalOther }) {
                         <h2>My Money</h2>
                     </span>
                     <span className='income-body'>
-                        <p>Income(Month): 13000 </p>
+                        <p>Income(Month): {formatNumber(expenseLimit.income)} </p>
                         <h4>Expenses Limit</h4>
-                        <p>Food: {limit.foods} </p>
-                        <p>Bills: {limit.bills} </p>
-                        <p>Others: {limit.bills} </p>
+                        <p>Food: {formatNumber(expenseLimit.food)} </p>
+                        <p>Bills: {formatNumber(expenseLimit.bills)} </p>
+                        <p>Others: {formatNumber(expenseLimit.others)} </p>
                     </span>
 
                 </div>
